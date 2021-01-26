@@ -78,9 +78,12 @@ else
   fi
 fi
 
+echo "-----> Python version..."
+python2 --version
+
 # Build app
 echo "-----> Building Play! application..."
-$PLAY_PATH/play version --silent | sed -u 's/^/       /'
+python2 $PLAY_PATH/play version --silent | sed -u 's/^/       /'
 
 # Precompile the Play! application at the root of $BUILD_DIR
 APP_DIR=./
@@ -88,12 +91,12 @@ echo "       Building Play! application at directory $APP_DIR"
 
 DEPENDENCIES_CMD="$PLAY_PATH/play dependencies $APP_DIR --forProd --forceCopy --silent -Duser.home=$BUILD_DIR 2>&1"
 echo "       Resolving dependencies: $DEPENDENCIES_CMD"
-eval "$DEPENDENCIES_CMD" | sed -u 's/^/       /'
+eval "python2 $DEPENDENCIES_CMD" | sed -u 's/^/       /'
 check_compile_status
 
 PRECOMPILE_CMD="$PLAY_PATH/play precompile $APP_DIR --silent 2>&1"
 echo "       Precompiling: $PRECOMPILE_CMD"
-eval "$PRECOMPILE_CMD" | sed -u 's/^/       /'
+eval "python2 $PRECOMPILE_CMD" | sed -u 's/^/       /'
 check_compile_status
 
 # Repack Play! framework into cache
