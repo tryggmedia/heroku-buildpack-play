@@ -80,7 +80,7 @@ fi
 
 # Build app
 echo "-----> Building Play! application..."
-python2 $PLAY_PATH/play version | sed -u 's/^/       /'
+$PLAY_PATH/play version --silent | sed -u 's/^/       /'
 
 # Precompile the Play! application at the root of $BUILD_DIR
 APP_DIR=./
